@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>3</title>
+        <link type="text/css" rel="stylesheet" href="../css/index1.css">
+        <script src="../js/model_management/language.js"></script>
+        <script src="../js/model_management/index.js"></script>
+        <script src="../lib/three.js"></script>
+        <script src="../lib/OBJMTLLoader.js"></script>
+        <script src="../lib/MTLLoader.js"></script>
+        <script src="../lib/jquery.min.js"></script>
+        <script src="../lib/OrbitControls.js"></script>
+
+        <!--引入leancloud-->
+        <script src="https://cdn1.lncld.net/static/js/av-mini-0.6.4.js"></script>
+
+        <script type="text/javascript">
+            AV.initialize('5dIY14evaxRpe5WNkS8lgz2A', 'Lz0FpW2NYF1io7vS2hIlEDEU');
+            var Folder = AV.Object.extend("Folder");
+            function addFolder() {
+                var folderName = prompt("请输入文件夹名字", "未命名"); //将输入的内容赋给变量 name ，
+             //这里需要注意的是，prompt有两个参数，前面是提示的话，后面是当对话框出来后，在对话框里的默认值
+
+                var folder = new Folder();
+                folder.set("folderName", folderName);
+                folder.set("owner", "me");
+                folder.set("addTime", "time1");
+                var name = folder.get("folderName");
+                folder.save(null, {
+                success: function () {
+                    // 成功保存之后，执行其他逻辑.
+                    alert('Folder ' + name + ' add successfully!');
+                    showFolder();
+                },
+                error: function (error) {
+                // 失败之后执行其他逻辑
+                // error 是 AV.Error 的实例，包含有错误码和描述信息.
+                alert('Failed to add folder ' + name + error.message);
+                }
+                });
+            }
+
+            function showFolder() {
+                var query = new AV.Query(Folder);
+                query.equalTo("owner", "me");
+                query.find({
+                success: function (results) {
+                    $("#folders").append("<li id='folder" + results.length + "' onclick='showFolder()" + results[results.length-1].get("folderName") + "'>" + results[results.length-1].get("folderName") + "</li>");
+                }
+                }, {
+                    error: function (error) {
+                    alert("Error: " + error.code + " " + error.message);
+                }
+                });
+            }
+
+            var Model = AV.Object.extend("Model");
+            function showFoldernihao(){
+            var query = new AV.Query(Model);
+            query.equalTo("folder", "nihao");
+            query.find({
+            success: function (results) {
+                $("#models").append("<li id='model" + results.length + "' onclick='showModel" + results[results.length-1].get("modelName") + "'>" + results[results.length-1].get("modelName") + "</li>");
+                }
+            }, {
+            error: function (error) {
+                 alert("Error: " + error.code + " " + error.message);
+            }
+            });
+            }
+            function changeC() {
+                changeToChinese();
+                fresh();
+            }
+            function changeE() {
+                changeToEnglish();
+                fresh();
+            }
+        </script>
+    </head>
+
+    <body onload="threeStart()">
+
+    <div id="container">
+        <div id="language">
+            <div style="position:absolute;top:1%;left:1%;">
+                <input type="submit" value="   中  文   " onclick="changeC()" style="opacity:0.9;cursor:pointer;border:none;"/>
+                <input type="submit" value="  English  " onclick="changeE()" style="opacity:0.9;cursor:pointer;border:none;"/>
+            </div>
+        </div>
+
+        <div id="fbd">
+            <div id="info">
+                <img src="../resource/image/background.jpg" style="width: 70%; height: 70%; padding-left:15%;padding-top:15px;>
+                            <table>
+                                <tr>
+                                    <td id=">
+                 <table>
+                    <tr>
+                        <td id="usrName"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td id="totalFolder"></td>
+                        <td id="totalFolderValue"></td>
+                    </tr>
+                    <tr>
+                        <td id="totalModel"></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="file">
+                <button type="submit" id="addFolder" onclick="addFolder();"></button>
+                <button type="submit" id="delFolder" onclick="delFolder();"></button>
+                <div><ul id="folders"></ul></div>
+            </div>
+        </div>
+
+        <div id="ufo">
+           <p id="modelClass1"></p>
+           <ul id="models"></ul>
+        </div>
+
+        <div id="show">
+            <div id = "button">
+                <a href="#" id="selectMtl"><input type="file" onchange="previewObject()"></a>
+                <br>
+                <a href="#" id="selectObj"><input type="file" onchange="previewObject()"></a>
+                <br>
+                <button type="submit" id="preview" onclick="addObj();"></button>
+                <button type="submit" id="upload" onclick="uploadModel();"></button>
+            </div>
+                <script type="text/javascript">
+                    var obj = new THREE.Object3D();//新建一个全局变量读取下面加载的物体
+
+                    //加载从本地读取的文件c
+                    var loader = new THREE.OBJMTLLoader();
+                    loader.load( '../resource/model/Probe.obj','../resource/model/Probe.mtl', function ( object ) {
+                        obj.add( object );
+                        renderer.clear();
+                        renderer.render(scene, camera);
+                    });
+
+                    obj.rotation.x = Math.PI / 5;
+                    obj.rotation.y = Math.PI / 5;
+                    obj.scale.x = 2;
+                    obj.scale.y = 2;
+                    obj.scale.z = 2;
+
+                    var animating = true;
+                    function run(){
+                        renderer.clear();
+                        renderer.render(scene, camera);
+                        if (animating){
+                            obj.rotation.y -= -0.01;
+                        }
+                    }
+                </script>
+                <label id="effectPic"></label>
+                <button type="submit" id="auto" onclick="auto();"></button>
+                <button type="submit" id="manual" onclick="orbit();"></button>
+                <div id = "canvas3d"></div>
+        </div>
+    </div>
+</body>
+</html>

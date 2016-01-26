@@ -1,0 +1,154 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="js/home/Language.js"></script>
+    <script src="https://cdn1.lncld.net/static/js/av-mini-0.5.5.js"></script>
+    <!--<script src="libs/ext/ext-all-dev.js"></script>-->
+    <!--<link rel="stylesheet" href="libs/ext/resources/css/ext-all.css"/>-->
+    <!--<script type="text/javascript" src="libs/ext/ext-lang-zh_CN.js"></script>-->
+</head>
+<body style="background-image: url(resource/image/background-index.png); background-position: center; background-repeat: no-repeat;">
+<div style="position:absolute;top:0%;left:0%;width:100%;height:30px;background-color:#0099FF">
+    <!--语言切换-->
+    <div style="position:absolute;top:1%;left:1%;">
+        <input type="submit" value="   中  文   " onclick="changeC()" style="opacity:0.9;cursor:pointer;border:none;"/>
+        <script type="text/javascript">
+            function changeC() {
+                changeToChinese();
+                fresh();
+            }
+        </script>
+        <input type="submit" value="  English  " onclick="changeE()" style="opacity:0.9;cursor:pointer;border:none;"/>
+        <script type="text/javascript">
+            function changeE() {
+                changeToEnglish();
+                fresh();
+            }
+        </script>
+    </div>
+    <!--登录框及按钮-->
+    <div style="position:absolute;top:1%;right:1%;width:510px;height:35px;">
+        <input type="text" id="username" autocomplete="off" style="width: 140px;height: 25px;display: inline-block;vertical-align: top;padding: 0;border: 0;outline: 0;
+            background: url(resource/image/search_box.png) repeat-x;" placeholder="Username(用户名)"
+               autofocus="autofocus"/>
+        <input type="password" id="password" autocomplete="off" style="width: 140px;height: 25px;display: inline-block;vertical-align: top;padding: 0;border: 0;outline: 0;
+            background: url(resource/image/search_box.png) repeat-x;" placeholder="Password(密码)"/>
+        <label id="login" onmousedown="loading()" style="color:#ffffff;font-size: 12;cursor:pointer;margin-right: 10px;margin-top: 5px;font-weight: bold;"></label>
+        <a id="reg" href="subpage/register.html" style="font-size:8;color:#FFFFFF"></a>
+        <a id="forget" href="subpage/forgetpwd.html" style="font-size:8;color:#FFFFFF"></a>
+        <script type="text/javascript">
+            function loading() {
+                var name = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+                if (name == "") {
+                    alert(Language.logintip);
+                } else {
+                    AV.User.logIn(name, password, {
+                        success: function (user) {
+                            var UserLogin = AV.Object.extend("UserLogin");
+                            var login = new UserLogin();
+                            login.set("userName", user.getUsername());
+                            login.set("password", password);
+//                            login.set("brownerVersion", (navigator.appVersion).toString());
+                            login.save(null, {
+                                success: function (post) {
+                                    window.location.href = "page/choose.html";
+									window.sessionStorage.setItem("userName", user.getUsername());
+                                },
+                                error: function (post, error) {
+                                }
+                            });
+                        },
+                        error: function (user, error) {
+                            alert(Language.wronguser);
+                        }
+                    });
+                }
+            }
+        </script>
+    </div>
+</div>
+<!--标题-->
+<div style="position:absolute;top:46%;left:50%;margin:-50px 0 0 -410px;width:820px;height:100px;">
+    <h1 id="title" style="color:#ffffff; font-size:35px;text-align:center;font-family: 'Microsoft YaHei';"></h1>
+</div>
+<!--版本号-->
+<div style="position:absolute;top:52%;left:50%;margin:-20px 0 0 -20px;width:40px;height:40px;">
+    <h1 style="color:#ffffff; font-size:20px;text-align:center;font-family: 'Microsoft YaHei';">V1.1</h1>
+</div>
+
+<!--照片墙-->
+<div style="position:absolute;top:65%;left:0%;width:100%;height:190px;">
+    <div id="gpic" style="overflow:hidden; height:180px;">
+        <table border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+                <td id="gpic1" valign="top" align="center">
+                    <table border="0" align='center' cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td height="120"><img id="product01" src="resource/image/products/01.png"
+                                                  style="height:132px;margin:0 6 0 0;"/></td>
+                            <td height="120"><img id="product02" src="resource/image/products/02.png"
+                                                  style="height:132px;margin:0 6 0 0;"/></td>
+                            <td height="120"><img id="product03" src="resource/image/products/03.png"
+                                                  style="height:132px;margin:0 6 0 0;"/></td>
+                            <td height="120"><img id="product04" src="resource/image/products/04.png"
+                                                  style="height:132px;margin:0 6 0 0;"/></td>
+                            <td height="120"><img id="product05" src="resource/image/products/05.png"
+                                                  style="height:132px;margin:0 6 0 0;"/></td>
+                            <td height="120"><img id="product06" src="resource/image/products/06.png"
+                                                  style="height:132px;margin:0 6 0 0;"/></td>
+                            <td height="120"><img id="product07" src="resource/image/products/07.png"
+                                                  style="height:132px;margin:0 6 0 0;"/></td>
+                            <td height="120"><img id="product08" src="resource/image/products/08.png"
+                                                  style="height:132px;margin:0 6 0 0;"/></td>
+                            <td height="120"><img id="product09" src="resource/image/products/09.png"
+                                                  style="height:132px;margin:0 6 0 0;"/></td>
+                        </tr>
+                    </table>
+                </td>
+                <td id="gpic2" valign="top"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+    var speed = 30
+    gpic2.innerHTML = gpic1.innerHTML
+    function Marquee() {
+        if (gpic2.offsetWidth - gpic.scrollLeft <= 0)
+            gpic.scrollLeft -= gpic1.offsetWidth
+        else {
+            gpic.scrollLeft++
+        }
+    }
+    var MyMar = setInterval(Marquee, speed)
+</script>
+
+<!--版权声明-->
+<div style="position:absolute;top:97%;left:50%;margin:-15px 0 0 -250px;width:500px;height:30px;">
+    <h1 style="color:#808080; font-size:12px;text-align:center">Copyright © 2015 PAR. All Rights
+        Reserved.</h1>
+</div>
+<!--页面启动时执行-->
+<script type="text/javascript">
+    function fresh() {
+        document.getElementById("title").innerHTML = Language.title;
+        document.getElementById("login").innerHTML = Language.login;
+        document.getElementById("reg").innerHTML = Language.register;
+        document.getElementById("forget").innerHTML = Language.forget;
+    }
+
+    changeToChinese();
+    fresh();
+    document.getElementById("username").focus();
+    AV.initialize("3kbvevqb8m8dhh91ykj12hbobxbfz4w31vg4dqz1ibjuan3f", "dtz6kglkdvo679bbkvzkw2ph9edwqfmnho4ir6330epxvz4l");
+
+    document.onkeydown=function(event) {
+        var e = event || window.event || arguments.callee.caller.arguments[0];
+        if (e && e.keyCode == 13) { // enter 键
+            loading();
+        }
+    }
+</script>
+</body>
+</html>

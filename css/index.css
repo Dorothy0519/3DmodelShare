@@ -1,0 +1,178 @@
+/*created by mxx*/
+html,body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    font-family: "Microsoft Yahei";
+    font-size: 14px;
+    color: grey;
+    /*background-color: black;*/
+}
+
+a{
+    text-decoration: none;
+    color: grey;
+}
+
+ul{
+    line-height: 25px;
+    list-style: none;
+    margin-left: -10px;
+}
+
+#container{width:100%;height:100%;margin:0;}
+
+#language{width:100%;height:5%;border:1px solid #393e43;}
+#fbd{width:19%;height:95%;float:left;}
+
+#ufo{
+    width:30%;
+    height:95%;
+    border-right:1px solid #393e43;
+    float:left;
+}
+
+#show{
+    width:50%;
+    height:95%;
+    /*border:1px solid #393e43;*/
+    float:left;
+}
+
+#file{
+    width:100%;
+    height:100%;
+    border-right:1px solid red;
+    float:left;
+}
+
+#folderbtn{
+    padding: 20px 15%;
+    padding-bottom: 0;
+}
+
+#folderlist{
+    padding: 0 7%;
+}
+
+#modelbtn{
+    padding: 20px 15%;
+    padding-left: 40px;
+    padding-bottom: 5px;
+}
+
+#modellist{
+    padding: 0 7%;
+    padding-left: 20px;
+}
+
+#canvas3d{
+    /*border: solid 1px darkgray;*/
+    cursor: move;
+    height: 575px;
+    /*height: auto;*/
+    background-color: #ffffff;
+    margin-top: 5px;
+}
+
+.choose{
+    margin-left: 50px;
+    margin-top: 50px;
+    /*border: solid 1px red;*/
+    border-radius: 15px;
+    width: 240px;
+    height: 740px;
+    float: left;
+}
+
+#userInfo{
+    position: absolute;
+    top: 1%;
+    right: 1%;
+}
+
+.myModel{
+    background: repeat url(../resource/image/white_for_lrc2.png);
+    height: auto;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.modelList{
+    background: repeat url(../resource/image/white_for_lrc2.png);
+    padding: 20px;
+    margin-left: 100px;
+    /*margin-right: 90px;*/
+    margin-top: 50px;
+    border-radius: 15px;
+    width: 280px;
+    height: 700px;
+    float: left;
+}
+
+
+#button{
+    padding: 20px 15%;
+    padding-left: 40px;
+    padding-bottom: 0;
+}
+
+#viewModel{
+    padding: 20px 15%;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+#myModel{
+    margin: 0;
+    padding: 13px 30px;
+    font-size: 25px;
+    text-align: center;
+}
+
+#modelLib{
+    margin: 0;
+    padding: 13px 30px;
+    font-size: 25px;
+    text-align: center;
+}
+
+#button a{
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid #7a8590;
+    border-radius: 5px;
+    background-color: white;
+    padding: 2px 6px;
+    position: relative;
+    overflow: hidden;
+    font-size: 11px;
+    color: black;
+    margin: 2px;
+    font-weight: normal;
+    /*font-family: SimSun;*/
+}
+
+button{
+    border: 1px solid #7a8590;
+    border-radius: 5px;
+    background-color: white;
+    padding: 2px 6px;
+    font-size: 12px;
+    color: black;
+    margin: 2px;
+    font-weight: normal;
+    /*font-family: SimSun;*/
+}
+
+.check{
+    float: left;
+    margin-right: 10px;
+    margin-top: 7px;
+}
+
+.color{
+    color:#ff0000;
+}

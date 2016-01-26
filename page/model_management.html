@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>模型管理v1.0</title>
+    <link type="text/css" rel="stylesheet" href="../css/index.css">
+    <script src="../js/model_management/language.js"></script>
+    <script src="../lib/three.js"></script>
+    <script src="../lib/OBJMTLLoader.js"></script>
+    <script src="../lib/MTLLoader.js"></script>
+    <script src="../lib/jquery.min.js"></script>
+    <script src="../lib/OrbitControls.js"></script>
+    <script src="../lib/ajaxfileupload.js" type="text/javascript"></script>
+
+    <!--引入leancloud-->
+    <script src="https://cdn1.lncld.net/static/js/av-mini-0.6.4.js"></script>
+    <script src="../js/model_management/index.js"></script>
+
+</head>
+
+<body onload="threeStart();start()">
+    <div id="container">
+        <div id="language">
+            <div style="position:absolute;top:1%;left:1%;">
+                <input type="submit" value="   中  文   " onclick="changeC()" style="opacity:0.9;cursor:pointer;border:none;"/>
+                <input type="submit" value="  English  " onclick="changeE()" style="opacity:0.9;cursor:pointer;border:none;"/>
+            </div>
+            <div id="userInfo">
+                <table>
+                    <tr>
+                        <td id="welcome"></td>
+                        <td id="userNameValue"></td>
+                        <td id="totalFolder"></td>
+                        <td id="totalFolderValue"></td>
+                        <td id="totalModel"></td>
+                        <td id="totalModelValue"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="fbd">
+            <div id="file">
+                <div id="folderbtn">
+                    <button type="submit" id="addFolder" onclick="addFolder();"></button>
+                    <button type="submit" id="delFolder" onclick="delFolder();"></button>
+                </div>
+                <div id="folderlist"><ul id="folders"></ul></div>
+            </div>
+        </div>
+
+        <div id="ufo">
+            <div id=model">
+                <div id="modelbtn">
+                    <button type="submit" id="delModel" onclick="delModel();"></button>
+                </div>
+                <div id="modellist">
+                    <ul id="models"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="show">
+            <div id = "button">
+                <span id="selectMtl"></span><input id="selectedMtl" type="file">
+                <br>
+                <span id="selectObj"></span><input id="selectedObj" type="file">
+                <br>
+                <button id="preview" onclick="previewModel();"></button>
+                <button type="submit" id="upload" onclick="uploadModel();"></button>
+            </div>
+
+            <div id="viewModel">
+                <label id="effectPic"></label>
+                <button type="submit" id="auto" onclick="auto();"></button>
+                <button type="submit" id="manual" onclick="orbit();"></button>
+                <div id = "canvas3d"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
